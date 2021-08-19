@@ -77,4 +77,17 @@ You can also set the aesthetic properties of your geom manually. For example, we
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
 ```
+## Facets
+one way to split categorical variables is to plot into facets, subplots that each display one subset of the data.
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_wrap(~class, nrow = 2)
+```
+To facet the plot on combination of two variables, add \textbf{facet_grid} to your plot call. The first argument of \textbf{} is also a formula. This time the formula should contain two variable names separated by a ~:
+```{r}
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ cyl)
+```
 
