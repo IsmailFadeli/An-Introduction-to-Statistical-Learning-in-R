@@ -1,0 +1,80 @@
+---
+title: "Visualizing Data"
+author: "Ismail Fadeli"
+date: "August 19, 2021"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data Visualization in R
+In order to be able to visualize data, we have to install \textbf{tidyverse} package in R Studio. Here's the code for that:
+```{r tidyverse}
+library(tidyverse)
+```
+## Viewing Dataset
+To visualize cars miles per gallon dataset from the USA datacenter:
+```{r mpg}
+mpg
+```
+
+To plot \textbf{mpg} data, we need to run this code to put \textbf{displ} into x-axis and \textbf{hwy} into the y-axis.
+
+```{r pressure}
+  ggplot(data = mpg) + 
+    geom_point(mapping = aes(x = displ, y = hwy))
+```
+The visualized graph shows a negative relationship between the engine size and fuel efficiency. Bigger engine size uses more fuel than lower engine sizes to travel the same distance.
+
+With \textbf{ggplot}, you begin a plot with the function \textbf{ggplot()} creates a coordinate system that you can add layers to. The first argument of \textbf{ggplot} is the dataset to use in the graph. So \textbf{ggplot(data = mpg)} creates an empty graph.
+We can complete the graph by adding more layers to  \textbf{ggplot()}. The function \textbf{geompoint()} creates a layer to your plot, which creates a scatterplot.
+The mapping argument is always paired with \textbf{aes()}, and the x and y arguments of aes() specify which variables to map to the x-axes and y-axes.
+
+## Exercice
+1. When running the code \textbf{ggplot(data = mpg)}, we see an empty graph:
+2. The \textbf{mtcars} dataset has 32 rows and 11 columns.
+```{r}
+mtcars
+
+```
+3. The \textbf{drv} variable describes the type of the car, meaning it is either a front wheel drive, rear wheel, or four wheel drive.
+
+4. The code for a scatter plot of \textbf{hwy} versus \textbf{cyl}:
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = cyl, y = hwy))
+```
+
+## Aesthetic Mappings
+You can show information about your data by mapping the aesthetics in your plot to the variables in your dataset. For example, you can map the colors of your points to the class variable to reveal the class of each car:
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, color = class))
+```
+
+In the previous example, we mapped the class to the color aesthetic, but we could have mapped class to the size aesthetic in the same way. In this case, the exact size of each point would reveal its class affiliation. We get a warning here, because mapping an unordered variable (class) to an ordered variable (size) is not a good idea:
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, size = class))
+```
+Or we could have mapped class to the \textbf{alpha} aesthetic, which controls transparency of the points, or the shape of the points:
+```{r}
+# Top
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, alpha = class))
+
+# Buttom
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, shape = class))
+```
+You can also set the aesthetic properties of your geom manually. For example, we can make all of the points in our plot blue:
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
+```
+
