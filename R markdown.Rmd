@@ -3,9 +3,9 @@ title: "Visualizing Data"
 author: "Ismail Fadeli"
 date: "August 19, 2021"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
-  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -84,7 +84,7 @@ ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy)) +
   facet_wrap(~class, nrow = 2)
 ```
-To facet the plot on combination of two variables, add \textbf{facet_grid} to your plot call. The first argument of \textbf{} is also a formula. This time the formula should contain two variable names separated by a ~:
+To facet the plot on combination of two variables, add \textbf{facetgrid} to your plot call. The first argument of \textbf{facetgrid} is also a formula. This time the formula should contain two variable names separated by a ~:
 ```{r}
 ggplot(data = mpg)+
   geom_point(mapping = aes(x = displ, y = hwy)) +
