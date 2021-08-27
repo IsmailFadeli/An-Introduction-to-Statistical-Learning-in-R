@@ -1,0 +1,62 @@
+---
+title: "Data Transformation with dplyr"
+author: "Ismail Fadeli"
+date: "August 27, 2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data Transformation with dplyr
+
+```{r}
+library(nycflights13)
+```
+
+```{r }
+library(tidyverse)
+```
+```{r}
+flights
+```
+If we want to see all the data in flights: View(flights)
+
+## Filter Rows with filter()
+\textbf{filter()} allows you to subset observations based on their values. The first argument is the name of the dataframe. The second and the rest arguments are the expressions that filter the dataframe.
+For example, we can select all flights on January 1st with:
+
+```{r}
+filter(flights, month == 1, day ==1)
+```
+
+To assign the filtered result into a new dataframe we can use an assignement:
+```{r}
+jan1 <- filter(flights, month == 1, day == 1)
+```
+If you want to print the results and save them in a variable at the same time, you can use parentheses:
+```{r}
+(dec25 <- filter(flights, month ==12, day == 25))
+```
+## Comparisons
+The standard operations that R uses are: >, >=, <, <=, != (not equal), and == (equal).
+```{r}
+sqrt(2) ^ 2 == 2
+```
+```{r}
+1/49 *49 == 1
+```
+```{r}
+near(sqrt(2) ^ 2, 2)
+```
+
+```{r}
+near(1 / 49 * 49, 1)
+```
+
+Boolean operators in R are: & is "and"", | is "or"", ! is "not". The following code shows the months of November or December:
+```{r}
+filter(flights, month == 11 | month == 12)
+```
+
