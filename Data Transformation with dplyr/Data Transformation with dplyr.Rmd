@@ -2,7 +2,9 @@
 title: "Data Transformation with dplyr"
 author: "Ismail Fadeli"
 date: "August 27, 2021"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -58,5 +60,51 @@ near(1 / 49 * 49, 1)
 Boolean operators in R are: & is "and"", | is "or"", ! is "not". The following code shows the months of November or December:
 ```{r}
 filter(flights, month == 11 | month == 12)
+```
+
+```{r}
+nov_dec <- filter(flights, month %in% c(11, 12))
+```
+```{r}
+filter(flights, !(arr_delay > 120 | dep_delay > 120))
+filter(flights, arr_delay <= 120, dep_delay <= 120)
+```
+
+## Missing Values
+
+if you want to determine if a value is missing, use it.na():
+
+```{r}
+x <- NA
+```
+```{r}
+is.na(x)
+```
+```{r}
+df <- tibble(x = c(1, NA, 3))
+filter(df, x > 1)
+```
+
+```{r}
+filter(df, is.na(x) | x > 1)
+```
+Finding all flights that flew to Houston:
+```{r}
+flights
+```
+
+```{r}
+filter(flights, dest == "IAH" | dest == "HOU")
+```
+
+```{r}
+View(flights)
+```
+Finding all flights that were operated by United, American, or Delta:
+```{r}
+  filter(flights, carrier == "UA" | carrier == "AA" | carrier == "DL")
+```
+```{r}
+filter(flights, between(x = month, left = 7, right = 9))
 ```
 
